@@ -1,4 +1,4 @@
-[Ссылка на репозиторий(https://github.com/brivazz/picasso_tz)
+https://github.com/brivazz/picasso_tz
 
 # Тестовое задание: Загрузка и обработка файлов
 
