@@ -1,0 +1,103 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+---
+
+repos:
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.10.1
+    hooks:
+      - id: pyupgrade
+        args: ["--py310-plus"]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        exclude: ^.*\b(migrations)\b.*$
+        args: ["--skip-string-normalization"]  # Игнорирует одинарные кавычки
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.0
+    hooks:
+      - id: bandit
+        exclude: (^files_uploader/api/tests|files_uploader/api/migrations/)
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-toml
+      # Проверяет наличие документ-строки перед кодом
+      - id: check-docstring-first
+      # Пытается загрузить все файлы json для проверки синтаксиса
+      - id: check-json
+      # Для обрезки завершающих пробелов
+      - id: trailing-whitespace
+      # Для гарантии, что файлы заканчиваются новой строкой
+      - id: end-of-file-fixer
+      # Для контроля размера файлов, предотвратит добавление больших файлов в Git
+      - id: check-added-large-files
+      # Для проверки конфликтов слияния до любого коммита
+      - id: check-merge-conflict
+      # Заменяет двойные кавычки на одинарные
+      - id: double-quote-string-fixer
+      # Для предотвращения сохранение приватных ключей
+      - id: detect-private-key
+      # Сортирует и удаляет неправильные записи в requirements.txt
+      - id: requirements-txt-fixer
+      # Проверяет файлы Python на их валидность
+      - id: check-ast
+
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.2.0
+    hooks:
+      - id: autoflake
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        language_version: python3
+        types: [python]
+        exclude: (^files_uploader/api/tests|files_uploader/api/migrations/)
+        args: ["--config=setup.cfg"]
+        files: .
+        additional_dependencies:
+          [
+            flake8-broken-line,
+            flake8-bugbear,
+            flake8-commas,
+            flake8-comprehensions,
+            flake8-debugger,
+            flake8-docstrings,
+            flake8-eradicate,
+            flake8-string-format,
+            wemake-python-styleguide,
+          ]
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.26.3
+    hooks:
+      - id: check-github-workflows
+      - id: check-dependabot
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-use-type-annotations
+      - id: python-check-mock-methods
+      - id: python-check-blanket-noqa
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: [filename, .env]
+        exclude: (.env.example|files_uploader/api/tests|files_uploader/api/migrations/)
