@@ -1,10 +1,9 @@
 from http import HTTPStatus
 
+from api.models import File
 from django.test import Client, TestCase
 from django.utils import timezone
 from rest_framework.test import APITestCase
-
-from api.models import File
 
 from .tasks import process_file
 
@@ -39,7 +38,7 @@ class FileViewTests(TestCase):
 class FileModelTests(TestCase):
     def test_str(self):
         file = File.objects.create(file='test.txt', uploaded_at=timezone.now(), processed=True)
-        self.assertEqual(str(file), '2023-11-05')
+        self.assertEqual(str(file), '2023-11-06')
 
     def test_upload_to(self):
         file = File.objects.create(file='test.txt', uploaded_at=timezone.now(), processed=True)

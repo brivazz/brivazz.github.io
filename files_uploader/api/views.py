@@ -3,10 +3,9 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from config.tasks import process_file
-
 from .models import File
 from .serializers import FileSerializer
+from .tasks import process_file
 
 
 class FileAPIView(APIView):

@@ -1,10 +1,9 @@
 import os
 
+from api.models import File
 from celery import shared_task
 from django.conf import settings
 from PIL import Image
-
-from api.models import File
 
 
 @shared_task

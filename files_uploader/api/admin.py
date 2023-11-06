@@ -1,9 +1,12 @@
-from django.contrib import admin
+"""Модуль для отображения модели в админ-панели."""
 
-from .models import File
+from api.models import File
+from django.contrib import admin
 
 
 class FileAdmin(admin.ModelAdmin):
+    """Отображение модели в админ-панели."""
+
     list_display = ('pk', 'uploaded_at', 'processed')
 
 
