@@ -30,8 +30,8 @@ def process_file(file_id: int) -> None:
                     content = text_file.read()
                     processed_content = content.upper()
 
-                with open(processed_file_path, 'w') as processed_file:
-                    processed_file.write(processed_content)
+                    with open(processed_file_path, 'w') as processed_file:
+                        processed_file.write(processed_content)
             else:
                 # обработка других типов файлов
                 processed_file_path = os.path.join(settings.MEDIA_ROOT, file.file.name)
