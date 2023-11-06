@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from api.models import File
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.utils import timezone
 from rest_framework.test import APITestCase
@@ -10,10 +11,12 @@ from .tasks import process_file
 
 class FileUploadingTest(TestCase):
     def test_file_uploading(self):
-        file = File.objects.create(file='files/filename.txt', processed=True)
-        process_file(file.id)
-        file.refresh_from_db()
-        self.assertTrue(file.processed)
+        file_content = b'Test file content.'
+        file = SimpleUploadedFile('filename.txt', file_content)
+        file_obj = File.objects.create(file=file, processed=False)
+        process_file(file_obj.id)
+        file_obj.refresh_from_db()
+        self.assertTrue(file_obj.processed)
 
 
 class ApiPagesURLTests(APITestCase):
