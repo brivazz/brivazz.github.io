@@ -1,10 +1,16 @@
 version: '3.8'
 
+networks:
+  API:
+    driver: bridge
+
 services:
   redis:
     image: redis
     container_name: redis
     restart: unless-stopped
+    networks:
+      - API
     volumes:
       - ./redis/data:/data
     ports:
@@ -19,6 +25,8 @@ services:
     build: files_uploader/.
     container_name: api
     restart: unless-stopped
+    networks:
+      - API
     ports:
       - ${API_PORT}:${API_PORT}
     depends_on:
@@ -33,14 +41,14 @@ services:
     image: postgres:${POSTGRES_VERSION}
     container_name: postgres
     restart: unless-stopped
+    networks:
+      - API
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./postgresql/data:/var/lib/postgresql/data/
-    expose:
-      - ${POSTGRES_PORT}
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     healthcheck:
@@ -48,3 +56,18 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  nginx:
+    image: nginx:${NGINX_VERSION}
+    container_name: nginx
+    networks:
+      - API
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf:ro
+    environment:
+      NGINX_SET_REAL_IP_FROM: 192.168.1.0/24
+    depends_on:
+      - api
+    ports:
+      - ${NGINX_PORT}:80
