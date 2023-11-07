@@ -1,5 +1,5 @@
-from django.urls import path
+from django.urls import include, path
 
-from .views import FileAPIView, FileUploadedAPIView
-
-urlpatterns = [path('upload/', FileAPIView.as_view()), path('files/', FileUploadedAPIView.as_view())]
+urlpatterns = [
+    path('v1/', include('api.v1.urls')),
+]

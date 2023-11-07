@@ -1,11 +1,10 @@
+from api.models import File
+from api.serializers import FileSerializer
+from api.tasks import process_file
 from rest_framework import status
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from .models import File
-from .serializers import FileSerializer
-from .tasks import process_file
 
 
 class FileAPIView(APIView):

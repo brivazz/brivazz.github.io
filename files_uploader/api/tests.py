@@ -25,11 +25,11 @@ class ApiPagesURLTests(APITestCase):
         self.guest_client = Client()
 
     def test_files_url_exists_at_desired_location(self):
-        response = self.guest_client.get('/api/files/')
+        response = self.guest_client.get('/api/v1/files/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_upload_url_get_requests(self):
-        response_get = self.guest_client.get('/api/upload/')
+        response_get = self.guest_client.get('/api/v1/upload/')
         self.assertEqual(response_get.status_code, HTTPStatus.METHOD_NOT_ALLOWED)
 
 
