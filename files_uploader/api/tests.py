@@ -1,3 +1,4 @@
+from datetime import datetime
 from http import HTTPStatus
 
 from api.models import File
@@ -41,7 +42,7 @@ class FileViewTests(TestCase):
 class FileModelTests(TestCase):
     def test_str(self):
         file = File.objects.create(file='test.txt', uploaded_at=timezone.now(), processed=True)
-        self.assertEqual(str(file), '2023-11-06')
+        self.assertEqual(str(file), str(datetime.now().date()))
 
     def test_upload_to(self):
         file = File.objects.create(file='test.txt', uploaded_at=timezone.now(), processed=True)
