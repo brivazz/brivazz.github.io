@@ -67,12 +67,15 @@ def process_file(file_id: int) -> None:
         mimetype, encoding = mimetypes.guess_type(file_path)
         if os.path.isfile(file_path):
             processed_file_path = os.path.join(settings.MEDIA_ROOT, file.file.name)
+
             if mimetype and mimetype.startswith('image/'):
                 # обработка изображений
                 process_image(file_path, processed_file_path)
+
             elif mimetype and mimetype.startswith('text/'):
                 # обработка текстового файла
                 process_text(file_path, processed_file_path)
+
             else:
                 # обработка других типов файлов
                 process_other(file_path, processed_file_path)

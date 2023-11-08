@@ -1,6 +1,6 @@
 import os
 
-DEBUG = int(os.environ.get('DEBUG', default=0)) == 1
+DEBUG = os.environ.get('DEBUG', False) == 'True'
 
 # Application definition
 INSTALLED_APPS = [

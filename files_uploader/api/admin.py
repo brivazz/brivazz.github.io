@@ -7,7 +7,7 @@ from django.contrib import admin
 class FileAdmin(admin.ModelAdmin):
     """Отображение модели в админ-панели."""
 
-    list_display = ('pk', 'uploaded_at', 'processed')
+    list_display = ('pk', 'file', 'uploaded_at', 'processed')
 
 
 admin.site.register(File, FileAdmin)
