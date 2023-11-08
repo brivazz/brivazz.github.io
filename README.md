@@ -1,4 +1,6 @@
-[Ссылка на репозиторий](https://github.com/brivazz/brivazz.github.io)
+![GitHub top language](https://img.shields.io/github/languages/top/brivazz/picasso_tz)![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/brivazz/picasso_tz/code-checker.yml)![]()![GitHub language count](https://img.shields.io/github/languages/count/brivazz/picasso_tz)![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/brivazz/picasso_tz)![Github Repository Size](https://img.shields.io/github/repo-size/brivazz/picasso_tz)
+
+[Ссылка на репозиторий](https://github.com/brivazz/picasso_tz)
 
 **Тестовое задание:**
 
